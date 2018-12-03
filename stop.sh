@@ -1,0 +1,1 @@
+supervisorctl stop zh_flask

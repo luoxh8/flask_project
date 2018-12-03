@@ -1,0 +1,1 @@
+supervisorctl start zh_flask
