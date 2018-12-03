@@ -1,0 +1,14 @@
+server {
+    listen       80;
+    server_name  flask_project;
+    access_log  /root/flask_project/log/access.log;
+    error_log  /root/flask_project/log/error.log;
+
+    location / {
+        include        /root/flask_project/conf/zh_flask.ini;
+        uwsgi_pass      0.0.0.0:8080;
+        uwsgi_param UWSGI_CHDIR  /root/flask_project/;
+        uwsgi_param UWSGI_SCRIPT manage:run;
+    }
+
+}

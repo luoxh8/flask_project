@@ -1,1 +1,1 @@
-supervisorctl start zh_flask
+supervisorctl start flask_project

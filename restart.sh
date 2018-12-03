@@ -1,2 +1,2 @@
-supervisorctl stop zh_flask
-supervisorctl start zh_flask
+supervisorctl stop flask_project
+supervisorctl start flask_project
