@@ -32,13 +32,11 @@ def channel_collect(p):
 
 
 def allowed_file(filename):
-    '''
-
-
-
+    """
+        统一某个文件
     :param filename:
     :return:
-    '''
+    """
     ALLOWED_EXTENSIONS = {'png', 'PNG', 'jpg', 'JPG', 'jpeg', 'JPEG', 'gif', 'GIF'}
     return '.' in filename and \
            filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
@@ -50,9 +48,7 @@ def get_kick_key(user_id):
 
 def kick_out(user_id, exclude=''):
     """
-
-    踢出某个用户
-
+        踢出某个用户
     :param user_id:
     :param exclude:
     :return:
@@ -62,9 +58,7 @@ def kick_out(user_id, exclude=''):
 
 def safe_data(data):
     """
-
-    None判空，保护客户端
-
+        None判空，保护客户端
     :param data: 源data
     :return: 修改后的data
     """
@@ -74,6 +68,11 @@ def safe_data(data):
 
 
 def safe_data_list(data):
+    """
+       安全的将null数据转化为空字符串
+    :param data:
+    :return:
+    """
     list = []
     for d in data:
         safe_data(d)
