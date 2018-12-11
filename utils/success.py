@@ -5,7 +5,7 @@ def success_response_dict():
     }
 
 
-def success_reponse_list():
+def success_response_list():
     return {
         'code': 200,
         'data': [],

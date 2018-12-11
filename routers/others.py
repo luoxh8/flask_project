@@ -5,7 +5,7 @@ from models.others import Banner
 from utils.error import error_data
 from utils.generator import gen_bid
 from utils.libs import safe_data_list
-from utils.success import success_reponse_list, success_response_dict
+from utils.success import success_response_list, success_response_dict
 
 others = Blueprint('others', __name__)
 
@@ -36,7 +36,7 @@ def create():
 def list():
     banners = Banner.objects()
     if not banners: return error_data
-    return_data = success_reponse_list()
+    return_data = success_response_list()
     return_data['data'] = safe_data_list(banners)
     return return_data
 
