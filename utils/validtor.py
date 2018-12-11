@@ -16,17 +16,17 @@ def is_password(password):
     return re.match('^[a-zA-Z0-9_-]{6,30}$', password)
 
 
-def is_code(code):
+def is_code(code) -> bool:
     return code == '66666'
 
 
-def is_uid(id):
+def is_uid(id) -> bool:
     if User.objects(pk=id):
         return True
     return False
 
 
-def is_bid(id):
+def is_bid(id) -> bool:
     if Banner.objects(pk=id):
         return True
     return False

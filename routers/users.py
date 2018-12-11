@@ -13,7 +13,6 @@ users = Blueprint('users', __name__)
 
 
 @users.route('/')
-@as_json
 def index():
     return 'hello user'
 

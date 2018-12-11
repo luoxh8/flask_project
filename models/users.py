@@ -3,10 +3,8 @@ import datetime
 from flask_login import UserMixin
 from mongoengine import *
 
-from core.extra import db
 
-
-class User(db.Document, UserMixin):
+class User(Document, UserMixin):
     id = StringField(required=True, primary_key=True)
     nickname = StringField(required=True, max_length=50)
     phone = StringField(required=True, min_length=11, max_length=20)
@@ -58,13 +56,20 @@ class User(db.Document, UserMixin):
         )
 
 
-class UserBalance(db.Document):
+class UserBalance(Document):
     id = ReferenceField(User, True, CASCADE, primary_key=True)
     balance = IntField(null=False)  # 余额
     total = IntField(null=False, default=0)  # 累计充值
 
+    def to_dict(self):
+        return dict(
+            id=self.id,
+            balance=self.balance,
+            total=self.total,
+        )
 
-class UserBalanceLog(db.Document):
+
+class UserBalanceLog(Document):
     id = StringField(primary_key=True)
     user_id = IntField(null=False)  # 用户ID
     exec_type = IntField(null=False)  # 操作类型（1增加，2减少）
@@ -75,3 +80,17 @@ class UserBalanceLog(db.Document):
     remark = StringField(max_length=45)  # 备注
     created_time = DateTimeField(null=False, default=datetime.datetime.now())  # 记录时间
     platform = StringField(max_length=20)
+
+    def to_dict(self):
+        return dict(
+            id=self.id,
+            user_id=self.user_id,
+            exec_type=self.exec_type,
+            money=self.money,
+            corresponding=self.corresponding,
+            corresponding_id=self.corresponding_id,
+            book_id=self.book_id,
+            remark=self.remark,
+            created_time=self.created_time,
+            platform=self.platform,
+        )

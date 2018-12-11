@@ -5,9 +5,8 @@ from urllib.parse import unquote
 from flask import (abort, Flask, request)
 from flask_mongoengine import MongoEngineSessionInterface
 
-from core import auth
 from core.config import (base_dir, white_list)
-from core.extra import db, json
+from core.extra import db, json, login_manager
 from utils.generator import gen_ip
 
 
@@ -31,8 +30,8 @@ def reg_session(app):
 
 
 def reg_auth(app):
-    auth.login_manager.init_app(app)
-    auth.login_manager.login_view = "users.login"
+    login_manager.init_app(app)
+    login_manager.login_view = "users.login"
 
 
 def reg_redis(app):

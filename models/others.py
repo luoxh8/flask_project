@@ -3,10 +3,8 @@ from json import dumps, loads
 
 from mongoengine import *
 
-from core import db
 
-
-class Banner(db.Document):
+class Banner(Document):
     id = StringField(primary_key=True)
     title = StringField(max_length=100)
     platform = StringField(max_length=50)

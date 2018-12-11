@@ -10,7 +10,7 @@ from utils.success import success_reponse_list, success_response_dict
 others = Blueprint('others', __name__)
 
 
-@others.route('/create', methods=['POST'])
+@others.route('/banners/create', methods=['POST'])
 @as_json
 def create():
     data = {
@@ -31,7 +31,7 @@ def create():
     return return_data
 
 
-@others.route('/list')
+@others.route('/banners/list')
 @as_json
 def list():
     banners = Banner.objects()

@@ -2,10 +2,8 @@ import datetime
 
 from mongoengine import *
 
-from core import db
 
-
-class SignIn(db.Document):
+class SignIn(Document):
     """签到记录表"""
     id = StringField(primary_key=True)
     user_id = StringField(unique=True)
@@ -14,17 +12,26 @@ class SignIn(db.Document):
     multi_sign_bonus = StringField(max_length=15, default='[]')  # 累计签到奖励领取列表
     created = DateTimeField(default=datetime.datetime.now())
 
-    def __init__(self, user_id, last_sign_day, sign_days):
-        self.user_id = user_id
-        self.last_sign_day = last_sign_day
-        self.sign_days = sign_days
+    def to_dict(self):
+        return dict(
+            id=self.id,
+            user_id=self.user_id,
+            last_sign_day=self.last_sign_day,
+            sign_days=self.sign_days,
+            multi_sign_bonus=self.multi_sign_bonus,
+            created=self.created,
+        )
 
 
-class BindPhoneActivity(db.Model):
+class BindPhoneActivity(Document):
     """绑定手机送288阅币活动"""
     id = StringField(primary_key=True)
     user_id = StringField(unique=True)
     created = DateTimeField(default=datetime.datetime.now())
 
-    def __init__(self, user_id):
-        self.user_id = user_id
+    def to_dict(self):
+        return dict(
+            id=self.id,
+            user_id=self.user_id,
+            created=self.created,
+        )
