@@ -5,7 +5,7 @@ from urllib.parse import unquote
 from flask import (abort, Flask, request)
 from flask_mongoengine import MongoEngineSessionInterface
 
-from core.config import (base_dir, white_list)
+from core.config import (base_dir, white_list, BaseConfig)
 from core.extra import db, json, login_manager
 from utils.generator import gen_ip
 
@@ -20,9 +20,9 @@ def reg_bp(app):
     from routers.homes import homes
     from routers.others import others
 
-    app.register_blueprint(users, url_prefix='/users')
-    app.register_blueprint(homes, url_prefix='/homes')
-    app.register_blueprint(others, url_prefix='/others')
+    app.register_blueprint(users)
+    app.register_blueprint(homes)
+    app.register_blueprint(others)
 
 
 def reg_session(app):
@@ -99,13 +99,13 @@ def reg_check_sn(app):
 
         if old_key.lower() != new_key.lower():
             tmp_s = json.dumps({
-                'get_params'           : request.args.to_dict(),
-                'post_params'          : request.form.to_dict(),
-                'sorted_params'        : params,
+                'get_params': request.args.to_dict(),
+                'post_params': request.form.to_dict(),
+                'sorted_params': params,
                 'sorted_params_encoded': unquote(params.encode('UTF-8')),
-                'server_sn'            : new_key.lower(),
-                'client_sn'            : old_key.lower(),
-                'server_md5'           : md5_str,
+                'server_sn': new_key.lower(),
+                'client_sn': old_key.lower(),
+                'server_md5': md5_str,
             })
             print('\r\n Error Verify >>>', tmp_s)
             # return tmp_s
@@ -121,9 +121,10 @@ def reg_json(app):
     json.init_app(app)
 
 
-def create_app(config_class):
+def create_app(config_class=None):
     app = Flask(__name__, template_folder=base_dir + '/templates')
-    app.config.from_object(config_class)
+    app.config.from_object(config_class if config_class else BaseConfig)
+
     reg_db(app)
 
     if not app.debug:

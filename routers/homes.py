@@ -3,7 +3,7 @@ from flask_socketio import close_room, disconnect, emit, join_room, leave_room, 
 
 from core.extra import io, thread_lock
 
-homes = Blueprint('homes', __name__)
+homes = Blueprint('homes', __name__, url_prefix='/homes')
 thread = None
 
 
@@ -20,7 +20,7 @@ def background_thread():
     while True:
         io.sleep(10)
         count += 1
-        io.emit('my_response', {'data' : 'Server generated event',
+        io.emit('my_response', {'data': 'Server generated event',
                                 'count': count},
                 namespace='/test')
 
@@ -28,14 +28,14 @@ def background_thread():
 @io.on('my_event', namespace='/test')
 def test_message(message):
     session['receive_count'] = session.get('receive_count', 0) + 1
-    emit('my_response', {'data' : message['data'],
+    emit('my_response', {'data': message['data'],
                          'count': session['receive_count']})
 
 
 @io.on('my_broadcast_event', namespace='/test')
 def test_broadcast_message(message):
     session['receive_count'] = session.get('receive_count', 0) + 1
-    emit('my_response', {'data' : message['data'],
+    emit('my_response', {'data': message['data'],
                          'count': session['receive_count']},
          broadcast=True)
 
@@ -44,7 +44,7 @@ def test_broadcast_message(message):
 def join(message):
     join_room(message['room'])
     session['receive_count'] = session.get('receive_count', 0) + 1
-    emit('my_response', {'data' : 'In rooms: ' + ', '.join(rooms()),
+    emit('my_response', {'data': 'In rooms: ' + ', '.join(rooms()),
                          'count': session['receive_count']})
 
 
@@ -52,14 +52,14 @@ def join(message):
 def leave(message):
     leave_room(message['room'])
     session['receive_count'] = session.get('receive_count', 0) + 1
-    emit('my_response', {'data' : 'In rooms: ' + ', '.join(rooms()),
+    emit('my_response', {'data': 'In rooms: ' + ', '.join(rooms()),
                          'count': session['receive_count']})
 
 
 @io.on('', namespace='/test')
 def close(message):
     session['receive_count'] = session.get('receive_count', 0) + 1
-    emit('my_response', {'data' : 'Room ' + message['room'] + ' is closing.',
+    emit('my_response', {'data': 'Room ' + message['room'] + ' is closing.',
                          'count': session['receive_count']},
          room=message['room'])
     close_room(message['room'])
@@ -68,7 +68,7 @@ def close(message):
 @io.on('my_room_event', namespace='/test')
 def send_room_message(message):
     session['receive_count'] = session.get('receive_count', 0) + 1
-    emit('my_response', {'data' : message['data'],
+    emit('my_response', {'data': message['data'],
                          'count': session['receive_count']},
          room=message['room'])
 
@@ -76,7 +76,7 @@ def send_room_message(message):
 @io.on('disconnect_request', namespace='/test')
 def disconnect_request():
     session['receive_count'] = session.get('receive_count', 0) + 1
-    emit('my_response', {'data' : 'Disconnected!',
+    emit('my_response', {'data': 'Disconnected!',
                          'count': session['receive_count']})
     disconnect()
 
@@ -92,7 +92,7 @@ def test_connect():
     with thread_lock:
         if thread is None:
             thread = io.start_background_task(target=background_thread)
-    emit('my_response', {'data' : 'Connected',
+    emit('my_response', {'data': 'Connected',
                          'count': 0})
 
 

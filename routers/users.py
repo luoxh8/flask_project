@@ -9,7 +9,7 @@ from utils.libs import hash_password, safe_data
 from utils.success import success_response_dict
 from utils.validtor import is_code, is_password, is_phone
 
-users = Blueprint('users', __name__)
+users = Blueprint('users', __name__, url_prefix='/users')
 
 
 @users.route('/')

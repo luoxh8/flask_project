@@ -7,16 +7,16 @@ from utils.generator import gen_bid
 from utils.libs import safe_data_list
 from utils.success import success_response_list, success_response_dict
 
-others = Blueprint('others', __name__)
+others = Blueprint('others', __name__, url_prefix='/others')
 
 
 @others.route('/banners/create', methods=['POST'])
 @as_json
-def create():
+def banners_create():
     data = {
-        'title'     : 'hello world',
-        'platform'  : 'ios',
-        'url'       : 'www.baidu.com',
+        'title': 'hello world',
+        'platform': 'ios',
+        'url': 'www.baidu.com',
         'banner_url': 'www.baidu.com',
     }
     banner = Banner(
@@ -33,7 +33,7 @@ def create():
 
 @others.route('/banners/list')
 @as_json
-def list():
+def banners_list():
     banners = Banner.objects()
     if not banners: return error_data
     return_data = success_response_list()
@@ -45,11 +45,11 @@ def list():
 @as_json
 def config():
     data = {
-        'ios_test'    : False,
+        'ios_test': False,
         'force_update': False,
         'check_update': {
-            "appVersion" : 100,
-            "changeLog"  : "更新内容",
+            "appVersion": 100,
+            "changeLog": "更新内容",
             "downloadUrl": "https://www.baidu.com",
         },
     }
