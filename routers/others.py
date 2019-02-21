@@ -2,10 +2,10 @@ from flask import Blueprint
 from flask_json import as_json
 
 from models.others import Banner
-from utils.error import error_data
-from utils.generator import gen_bid
-from utils.libs import safe_data_list
-from utils.success import success_response_list, success_response_dict
+from core.error import error_data
+from core.generator import gen_bid
+from core.libs import safe_data_list
+from core.success import success_response_list, success_response_dict
 
 others = Blueprint('others', __name__, url_prefix='/others')
 
@@ -44,7 +44,7 @@ def banners_list():
 @others.route('/config')
 @as_json
 def config():
-    data = {
+    return {
         'ios_test': False,
         'force_update': False,
         'check_update': {
@@ -53,4 +53,3 @@ def config():
             "downloadUrl": "https://www.baidu.com",
         },
     }
-    return data

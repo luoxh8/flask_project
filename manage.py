@@ -1,3 +1,5 @@
+from abc import ABC
+
 from flask_script import (Command, Manager)
 
 from core import create_app
@@ -8,7 +10,7 @@ app = create_app(BaseConfig)
 manager = Manager(app)
 
 
-class MyServer(Command):
+class MyServer(Command, ABC):
     def __call__(self, *args, **kwargs):
         app.run('0.0.0.0', 8080, threaded=True, use_reloader=True)
 

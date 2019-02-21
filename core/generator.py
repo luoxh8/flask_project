@@ -3,7 +3,7 @@ import string
 
 from flask import request
 
-from utils.validtor import is_bid, is_uid
+from core.validtor import is_bid, is_uid
 
 
 def gen_ip():

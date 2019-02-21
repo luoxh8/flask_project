@@ -7,7 +7,7 @@ from flask_mongoengine import MongoEngineSessionInterface
 
 from core.config import (base_dir, white_list, BaseConfig)
 from core.extra import db, json, login_manager
-from utils.generator import gen_ip
+from core.generator import gen_ip
 
 
 def reg_db(app):

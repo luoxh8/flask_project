@@ -3,11 +3,11 @@ from flask_json import as_json
 from flask_login import current_user, login_required, login_user
 
 from models.users import User
-from utils.error import error_code, error_params, error_user_does_exist, error_user_does_not_exist, error_user_password
-from utils.generator import gen_random_string, gen_uid
-from utils.libs import hash_password, safe_data
-from utils.success import success_response_dict
-from utils.validtor import is_code, is_password, is_phone
+from core.error import error_code, error_params, error_user_does_exist, error_user_does_not_exist, error_user_password
+from core.generator import gen_random_string, gen_uid
+from core.libs import hash_password, safe_data
+from core.success import success_response_dict
+from core.validtor import is_code, is_password, is_phone
 
 users = Blueprint('users', __name__, url_prefix='/users')
 

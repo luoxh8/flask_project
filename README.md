@@ -37,7 +37,7 @@ supervisor配置文件的名字：flask_project.conf
 
 
 
-ubuntu下，请使用```ln -s /root/flask_project/conf/flask_project.conf /ect/supervisor/conf.d/flask_project.conf``` 
+ubuntu下，并且项目在**root**下，```ln -s /root/flask_project/conf/flask_project.conf /ect/supervisor/conf.d/flask_project.conf``` 
 
 
 
