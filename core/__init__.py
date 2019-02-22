@@ -19,10 +19,12 @@ def reg_bp(app):
     from routers.users import users
     from routers.homes import homes
     from routers.others import others
+    from routers.admin import admin
 
     app.register_blueprint(users)
     app.register_blueprint(homes)
     app.register_blueprint(others)
+    app.register_blueprint(admin)
 
 
 def reg_session(app):
