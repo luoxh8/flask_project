@@ -8,6 +8,7 @@ from flask_mongoengine import MongoEngineSessionInterface
 from core.config import (base_dir, white_list, BaseConfig)
 from core.extra import db, json, login_manager
 from core.generator import gen_ip
+from routers.admin import admin_route
 
 
 def reg_db(app):
@@ -19,12 +20,11 @@ def reg_bp(app):
     from routers.users import users
     from routers.homes import homes
     from routers.others import others
-    from routers.admin import admin
 
     app.register_blueprint(users)
     app.register_blueprint(homes)
     app.register_blueprint(others)
-    app.register_blueprint(admin)
+    app.register_blueprint(admin_route.admin)
 
 
 def reg_session(app):

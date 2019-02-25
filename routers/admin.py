@@ -1,8 +1,14 @@
 from flask import Blueprint, render_template
 
-admin = Blueprint('admin', __name__, url_prefix='/admin')
+from routers.base import BaseRoute
 
 
-@admin.route('/index')
-def index():
-    return render_template('admin/index.html')
+class AdminRoute(BaseRoute):
+
+
+    @admin.route('/index')
+    def index(self):
+        return render_template('admin/index.html')
+
+
+admin_route = AdminRoute()

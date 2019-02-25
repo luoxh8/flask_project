@@ -1,7 +1,9 @@
 error_bad_request = {'code': 400, 'msg': 'bad request'}
+error_not_authenticate = {'code': 401, 'msg': 'you are not authenticate'}
 error_params = {'code': 501, 'msg': '参数错误'}
 error_data = {'code': 502, 'msg': '暂无数据'}
 error_code = {'code': 503, 'msg': '验证码错误'}
+
 
 # 600 - 700
 error_password = {'code': 600, 'msg': '密码验证错误'}
